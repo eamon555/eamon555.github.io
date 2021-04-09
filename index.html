@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Eamons Stock Bot </title>
+<h1> Eamon's Stock Trading Robot </h1>
+<h3> Live Reporting Of The Stock Portfolio </h3>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+
+}
+
+
+</style>
+</head>
+<body>
+<table style="width:100%">
+<tr> Live Price of [Crypto] </tr>
+<tr><th> <canvas id="Price" width="800" height="500"></canvas> </th></tr>
+</table>
+
+<script>
+// a function to create a timed delay
+function sleep(ms) {
+  return new Promise(
+    resolve => setTimeout(resolve, ms)
+  );
+}
+//end of sleep function
+var prices = [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+function pricegraph(prices) {
+//variblesneeded to get drawing object
+var price = document.getElementById("Price");
+price.width = price.width;
+var width = price.width;
+var height = price.height;
+var p = price.getContext("2d");
+
+
+var amount = prices.length;
+//converting Prices array into pixes for the chart
+function PriceToY (y) {
+return height - (y * (height/15));
+}
+function AmountToX (x) {
+return (width - (x*(width/amount)));
+}
+//Drawing on the graph
+p.moveTo(AmountToX(0),PriceToY(0));
+for( var g = 1; g <= amount; g++){
+	var priceindex = prices[g];
+	p.lineTo(AmountToX(g),PriceToY(priceindex));
+}
+p.lineWidth = 2;
+p.stroke();
+
+
+
+
+
+}
+var drawinterval = setInterval(draw,10000);
+var scrubinterval = setInterval(scrub,10000);
+function draw () {
+var newprice = Math.floor((Math.random()*15)+1);
+prices.push(newprice);
+pricegraph(prices);
+}
+function scrub () {
+prices.splice(0,1);
+}
+</script>
+
+</body>
+</html>
