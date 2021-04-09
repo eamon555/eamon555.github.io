@@ -60,8 +60,8 @@ p.stroke();
 
 
 }
-var drawinterval = setInterval(draw,10000);
-var scrubinterval = setInterval(scrub,10000);
+var drawinterval = setInterval(draw,100);
+var scrubinterval = setInterval(scrub,100);
 function draw () {
 var newprice = Math.floor((Math.random()*15)+1);
 prices.push(newprice);
